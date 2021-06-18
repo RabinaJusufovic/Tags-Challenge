@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>An HTML standard template</title>
+	<meta charset="utf-8"  />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body style="padding: 5%;">
+    <div>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">Tags Challenge</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                  <a class="nav-link" href="#">Home <span class="sr-only"></span></a>
+                </li>
+              </ul>
+              <form class="form-inline my-2 my-lg-0">
+                <a href="/auth/logout"><button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="float: right !important;" onclick="window.open('/auth/logout')">Log out</button></a>
+              </form>
+            </div>
+          </nav>
+    </div>
+    <form action="/auth/home" method="POST">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="link">Add a link: </span>
+            </div>
+            <input type="text" class="form-control" placeholder="http://www.example.com" name="link" id="linkcheck">
+            <button type="submit" class="btn btn-primary" id="add" onclick="add()">Add</button>
+        </div>
+    </form>
+
+    <script>
+        //The general idea was to filter the input right away in order to figure out wheter the link has tags or not
+        //I was not successful, another things that I found online but didn't have enough time to try was this: if (url.contains('?')) {} else {}
+        //When it comes to the third point of the tags (comparing urls) I found a npm package called compare urls https://www.npmjs.com/package/compare-urls
+        function add() {
+         $('#add').click(function () {
+                    var link=$('#linkcheck').val();
+                    var arr=link.split('?');
+                    if (link.length > 1 && arr[1] !== '') {
+                        console.log('params found');
+                    }
+                    else{
+                        alert('Enter a link with at least one tag');
+                    }
+        });
+      }
+    </script>
+</body>
+</html>
